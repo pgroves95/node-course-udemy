@@ -25,6 +25,10 @@ app.use(session({
 
 const db = pgp(CONN_STRING)
 
+app.get('/users/articles', (req, res) => {
+    res.render('articles', {username: req.session.user.username})
+})
+
 app.post('/login',(req,res) => {
     let username = req.body.username
     let password = req.body.password
