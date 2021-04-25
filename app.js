@@ -28,7 +28,11 @@ app.use(session({
 
 const db = pgp(CONN_STRING)
 
-app.get('/users/articles', (req, res) => {
+app.get('/users/add-article',(req,res) => {
+    res.render('add-article')
+})
+
+app.get('/users/add-articles', (req, res) => {
     res.render('articles', {username: req.session.user.username})
 })
 
