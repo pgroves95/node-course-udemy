@@ -8,16 +8,16 @@
 
 {{> nav}}
 
-<h2 style="margin-top: 10px;"class="text-center">Login</h2>
+<h2 style="margin-top: 10px;"class="text-center">Add Article</h2>
 
-<form action="/login" method="POST">
+<form action="/add-article" method="POST">
 <div class="mb-3">
-  <label for="usernameInput" class="form-label">Username</label>
-  <input type="text" name="username" class="form-control" id="usernameInput" placeholder="username">
+  <label for="title" class="form-label">Title</label>
+  <input type="text" name="title" class="form-control" id="title" placeholder="Title of Your Article">
 </div>
 <div class="mb-3">
-  <label for="passwordInput" class="form-label">Password</label>
-  <input type="password" name="password" class="form-control" id="passwordInput" placeholder="password">
+  <label for="body" class="form-label">Password</label>
+  <input type="textarea" name="articleBody" class="form-control" id="body" placeholder="Body of Your Article...">
 </div>
 
 <button type="submit" class="btn btn-primary">Submit</button>
