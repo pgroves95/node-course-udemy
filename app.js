@@ -28,8 +28,20 @@ app.use(session({
 
 const db = pgp(CONN_STRING)
 
-app.get('/add-article',(req,res) => {
+app.get('/users/add-article',(req,res) => {
     res.render('add-article')
+})
+
+app.post('/users/add-article', (req, res) => {
+
+    let title = req.body.title
+    let description = req.body.description
+    let userid = req.session.user.userid
+
+    db.none('INSERT INTO articles(title,body,userid) VALUES($1,$2,$3)', [title,description,userid])
+    .then(() => {
+        res.render('articles')
+    })
 })
 
 app.get('/users/articles', (req, res) => {
@@ -98,6 +110,6 @@ app.get('/register', (req,res) => {
     res.render('register')
 })
 
-app.listen(PORT, () => {
+app.listen(PORT, (req, res) => {
     console.log(`server is running on port ${PORT}...`)
 })

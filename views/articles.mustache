@@ -1,4 +1,4 @@
-{{username}}<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 {{> header}}
@@ -8,25 +8,9 @@
 
 {{> nav}}
 
-<h2 style="margin-top: 10px;"class="text-center">Add Article</h2>
+<h2 style="margin-top: 10px;"class="text-center">Articles</h2>
 
-<form action="/add-article" method="POST">
-<div class="mb-3">
-  <label for="title" class="form-label">Title</label>
-  <input type="text" name="title" class="form-control" id="title" placeholder="Title of Your Article">
-</div>
-<div class="mb-3">
-  <label for="body" class="form-label">Password</label>
-  <input type="textarea" name="articleBody" class="form-control" id="body" placeholder="Body of Your Article...">
-</div>
 
-<button type="submit" class="btn btn-primary">Submit</button>
-{{#message}}
-<div style="margin-top: 10px" class="alert alert-danger" role="alert">
-{{message}}
-</div>
-{{/message}}
-</form>
 
 </div>
 
