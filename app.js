@@ -29,23 +29,37 @@ app.use(session({
 const db = pgp(CONN_STRING)
 
 app.get('/users/add-article',(req,res) => {
-    res.render('add-article')
+
+    if(req.session.user){
+    res.render('add-article', {username: req.session.user.username})
+    } else {
+        res.render('login', {message: "Please log in to add an article."})
+    }
 })
 
 app.post('/users/add-article', (req, res) => {
 
-    let title = req.body.title
-    let description = req.body.description
-    let userid = req.session.user.userid
+        let title = req.body.title
+        let description = req.body.description
+        let userid = req.session.user.userid
 
-    db.none('INSERT INTO articles(title,body,userid) VALUES($1,$2,$3)', [title,description,userid])
-    .then(() => {
-        res.render('articles')
-    })
+        db.none('INSERT INTO articles(title,body,userid) VALUES($1,$2,$3)', [title,description,userid])
+        .then(() => {
+            res.render('articles')
+        })
 })
 
 app.get('/users/articles', (req, res) => {
-    res.render('articles', {username: req.session.user.username})
+    if(req.session.user){
+        let userid = req.session.user.userid
+        db.any('SELECT title,body,datecreated FROM articles WHERE userid = $1',[userid])
+        .then((selected) => {
+            console.log(selected)
+            res.render('articles', {username: req.session.user.username})
+
+        })} else {
+            res.render('login', {message: "Please log in to view your articles."})
+    }
 })
 
 app.post('/login',(req,res) => {
